@@ -1,0 +1,36 @@
+Music::PitchNum - note name and pitch number utility roles
+
+To install this module, use CPAN, for example:
+
+  cpan Music::PitchNum
+
+For the source code, see:
+
+http://github.com/thrig/Music-PitchNum
+
+which can be installed once git and cpanm are installed by e.g.
+
+  git clone https://github.com/thrig/Music-PitchNum
+  cd Music-PitchNum
+  cpanm .
+
+The documentation following installation can be found by running:
+
+  perldoc Music::PitchNum
+
+assuming that all went well.
+
+
+DEPENDENCIES
+
+Moo::Role and such, plus some time spent studying the various forms by which
+music theory notates notes.
+
+
+COPYRIGHT AND LICENCE
+
+Copyright (C) 2014 Jeremy Mates
+
+This library is free software; you can redistribute it and/or modify it under
+the same terms as Perl itself, either Perl version 5.20 or, at your option, any
+later version of Perl 5 you may have available.

@@ -1,0 +1,44 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.73.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It will check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+SHA1 97ab9f8e61d913dae6992a25c5f3614e42bd2438 Changes
+SHA1 269d769274c2dcdc1d0c7fba8e50569a9c72ecf0 MANIFEST
+SHA1 1c7503d5b58892922fb7096a9295dd3a9c589250 MANIFEST.SKIP
+SHA1 f4f1c09efd841d599aa3e929d89ae41365c3b550 META.json
+SHA1 e630f4300abf558421eb1fe0708803412dfc2c4c META.yml
+SHA1 6a6ccbd7d15703006c4ec2fc67fd9cc6a277a58e Makefile.PL
+SHA1 120693ed7798edd3e264f32bd00878f6ae9a13ae README
+SHA1 5104e850747f490cdae3cd9449b48af516cf0296 lib/Music/PitchNum.pm
+SHA1 0b1bef8260b7b08e6bb225bf6867fc1a8e88001b lib/Music/PitchNum/ABC.pm
+SHA1 05950efdab80ad2fd902e6949c32e6d9ada7a578 lib/Music/PitchNum/German.pm
+SHA1 e6cddb3220d7f4641380bcec8d41f076885b293b t/00-load.t
+SHA1 c8cd9091eeccc72c036332f653b9eaadbe7ea67a t/Music-PitchNum-ABC.t
+SHA1 29b068be0b64f2edfedb4c608f4d19ae5f73c77d t/Music-PitchNum-German.t
+SHA1 ddcc37ccd177621ab982ed65fe79b3279d44af9e t/Music-PitchNum.t
+SHA1 286aaeba66ebedcee52590625b240c288d567c76 t/manifest.t
+SHA1 785f20499dfb1a3d0e387741b6a0d07c2e6da907 t/pod-coverage.t
+SHA1 516c36cc09814e22d938717e946b4a43477b02db t/pod.t
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQEcBAEBAgAGBQJT74DjAAoJEDTEVWqwTuCUD2AH/igrN48rTbGwruQ6Ev/bREps
+VXJMh2y5lJ4fPXhQC5VADQ6HxK6V0vTgetkRsKGhFTFipAYvs8jG6MMIHWNUg5IS
+fZAWcp/Al/7WPDhNwNZNMUF3u7URWF77cphnwQeSkzNRMIS2XOnXQUhcNWypCEOT
++/o1Lnj1+pCOqII3vA41SDP7V5lKy9kWk8LPLTR8GW2t6E5+V5Bxl0H1eo/j7uLM
+Oz59wiJURfXbWa4VV0kdmLd72cmJQNgQcyGrrBsKBMqCAeWppev13QbDFeDzn27p
+HMwau5cbAzrr37tABHc+vOorHEUBKPdiRq9hHKXQin3CS168h/2aVr4rQB5COKk=
+=jRoh
+-----END PGP SIGNATURE-----
