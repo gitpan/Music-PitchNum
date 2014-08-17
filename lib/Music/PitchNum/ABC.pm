@@ -11,7 +11,7 @@ use Moo::Role;
 use POSIX qw/floor/;
 use Scalar::Util qw/looks_like_number/;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 # for pitchnum (TODO make these attributes or otherwise f(x) calls?)
 my %NOTE2NUM = (
@@ -95,7 +95,7 @@ __END__
 
 =head1 NAME
 
-Music::PitchNum::ABC - note name to pitch number utility roles
+Music::PitchNum::ABC - note name and pitch number roles for ABC notation
 
 =head1 SYNOPSIS
 

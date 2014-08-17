@@ -6,7 +6,7 @@ To install this module, use CPAN, for example:
 
 For the source code, see:
 
-http://github.com/thrig/Music-PitchNum
+https://github.com/thrig/Music-PitchNum
 
 which can be installed once git and cpanm are installed by e.g.
 
