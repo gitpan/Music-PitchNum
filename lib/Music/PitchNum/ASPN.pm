@@ -1,10 +1,9 @@
 # -*- Perl -*-
 #
-# Pitch numbers from the ABC notation for notes, in a distinct module as the
-# format is Case Sensitive, and the accidentals very different from those seen
-# in other notation formats.
+# Pitch number roles using the American Standard Pitch Notation (ASPN) format,
+# or something probably close enough.
 
-package Music::PitchNum::ABC;
+package Music::PitchNum::ASPN;
 
 use 5.010000;
 use Moo::Role;
@@ -23,19 +22,18 @@ my %NOTE2NUM = (
   A => 9,
   B => 11,
 );
-# ASPN-style note-fu for pitchname (ABC accidental form)
 my %NUM2NOTE = (
   0  => 'C',
-  1  => '^C',
+  1  => 'C#',
   2  => 'D',
-  3  => '^D',
+  3  => 'D#',
   4  => 'E',
   5  => 'F',
-  6  => '^F',
+  6  => 'F#',
   7  => 'G',
-  8  => '^G',
+  8  => 'G#',
   9  => 'A',
-  10 => '^A',
+  10 => 'A#',
   11 => 'B',
 );
 
@@ -47,14 +45,7 @@ sub pitchname {
   my ( $self, $number ) = @_;
   die "need a number for pitchname\n" if !looks_like_number $number;
 
-  my $octave = floor( $number / 12 ) - 1;
-  my $note   = $NUM2NOTE{ $number % 12 };
-
-  $note = lc $note if $octave > 4;
-  $note .= (q{'}) x ( $octave - 5 ) if $octave > 5;
-  $note .= (q{,}) x ( 4 - $octave ) if $octave < 4;
-
-  return $note;
+  return $NUM2NOTE{ $number % 12 } . ( floor( $number / 12 ) - 1 );
 }
 
 sub pitchnum {
@@ -65,22 +56,12 @@ sub pitchnum {
 
   my $pitchnum;
 
-  if ( $name =~
-    m/ (?<chrome> (?: [_]{1,2} | [\^]{1,2} ) )? (?: (?<note>[A-G])(?<octave>[,]+)? | (?<note>[a-g])(?<octave>[']+)? ) /x
-    ) {
-    my $octave = $+{octave};
-    my $chrome = $+{chrome};
-    my $note   = $+{note};
-
-    $pitchnum = $NOTE2NUM{ uc $note } + 12 * ( $note =~ m/[A-G]/ ? 5 : 6 );
-
-    if ( defined $octave ) {
-      $pitchnum += 12 * length($octave) * ( $octave =~ m/[,]/ ? -1 : 1 );
-    }
-
-    if ( defined $chrome ) {
-      $pitchnum += length($chrome) * ( $chrome =~ m/[_]/ ? -1 : 1 );
-    }
+  # Only sharps, as the Young article only has those. Use the main module for
+  # looser pitch name matching.
+  if ( $name =~ m/ (?<note>[A-Ga-g]) (?<chrome>[#])? (?<octave>-?[0-9]{1,2}) /x )
+  {
+    $pitchnum = 12 * ( $+{octave} + 1 ) + $NOTE2NUM{ uc $+{note} };
+    $pitchnum++ if defined $+{chrome};
   }
 
   return $pitchnum;
@@ -95,30 +76,29 @@ __END__
 
 =head1 NAME
 
-Music::PitchNum::ABC - note name and pitch number roles for ABC notation
+Music::PitchNum::ASPN - note name and pitch number roles for ASPN notation
 
 =head1 SYNOPSIS
 
-  package MyCleverMouse;
+  package MyCleverMod;
   use Moo;
-  with('Music::PitchNum::ABC');
+  with('Music::PitchNum::ASPN');
   ...
 
 Then elsewhere:
 
-  use MyCleverMouse;
-  my $x = MyCleverMouse->new;
+  use MyCleverMod;
+  my $x = MyCleverMod->new;
 
   $x->pitchname(69);    # A
+  $x->pitchname(70);    # A#
   $x->pitchnum('A');    # 69
+  $x->pitchnum('A#');   # 70
 
 =head1 DESCRIPTION
 
-A L<Music::PitchNum> implementation specifically for the ABC notation, which
-varies from the other notation forms by using case sensitive letters to denote
-octave indications, otherwise falling back to the Helmholtz form outside the
-range around middle C (via C<,> and C<'> marks). Oh, and the accidental
-notation is also totally different from the other forms.
+A L<Music::PitchNum> implementation specifically for the American Standard
+Pitch Notation (ASPN), also known as the scientific notation.
 
 This module is expected to be used as a Role from some other module;
 L<Moo::Role> may be informative.
@@ -134,8 +114,9 @@ passed something that is not a number.
 
 =item B<pitchnum> I<pitchname>
 
-Returns the pitch number for the given ABC note name, or C<undef> if the note
-could not be parsed.
+Returns the pitch number for the given ASPN note name, or C<undef> if the note
+could not be parsed. Only the note name C<A-G>, optional C<#> for sharp, and
+the octave number are parsed by this module; other forms will not match.
 
 =back
 
@@ -153,7 +134,9 @@ L<https://github.com/thrig/Music-PitchNum>
 
 =head2 Known Issues
 
-None known for the ABC notation support.
+None known for the ASPN notation support, though this is a very limited format
+with only one accidental style (a single C<#> for sharp) and a mandatory
+octave number.
 
 =head1 SEE ALSO
 
@@ -161,7 +144,9 @@ L<Music::PitchNum>
 
 =head2 REFERENCES
 
-L<http://abcnotation.com/examples>
+Young, R. W. (1939). "Terminology for Logarithmic Frequency Units". The Journal
+of the Acoustical Society of America 11 (1): 134-000.
+Bibcode:1939ASAJ...11..134Y. doi:10.1121/1.1916017.
 
 =head1 AUTHOR
 

@@ -15,7 +15,7 @@ use Moo::Role;
 use POSIX qw/floor/;
 use Scalar::Util qw/looks_like_number/;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 # for pitchnum (TODO make these attributes or otherwise f(x) calls?)
 my %NOTE2NUM = (
